@@ -42,7 +42,9 @@ Java : jdk1.8.0_231
         ```
     - Click 'Connect' button.
 
-
+## This app is deployed in heroku : Deployed links
+- Swagger ui : https://linkstation-app.herokuapp.com/api/swagger-ui.html
+- Api documentation : https://linkstation-app.herokuapp.com/api/v2/api-docs
 
 ## API Reference
 
