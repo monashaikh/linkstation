@@ -5,7 +5,6 @@ import com.ncs.linkstation.model.Point;
 import com.ncs.linkstation.service.LinkStationService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,8 +31,6 @@ public class LinkStationServiceIntegrationTest {
     @Autowired
     TestRestTemplate restTemplate;
 
-    ExpectedException expectedEx = ExpectedException.none();
-
     @Test
     public void testGetBestLinkStationForOrigin_validLinkStation() {
         Point point = getPoint(0, 0);
@@ -44,7 +41,7 @@ public class LinkStationServiceIntegrationTest {
     }
 
     @Test
-    public void testGetBestLinkStationForOrigin_NoLinkStation() {
+    public void testGetBestLinkStation_NoLinkStation() {
         Point point = getPoint(100, 100);
         HttpEntity<Point> httpEntity = new HttpEntity<>(point, getHttpHeaders());
         ResponseEntity<String> response = restTemplate.exchange(getUrl(), HttpMethod.POST, httpEntity, String.class);
@@ -53,7 +50,7 @@ public class LinkStationServiceIntegrationTest {
     }
 
     @Test
-    public void testGetBestLinkStationForOrigin_BadRequest() {
+    public void testGetBestLinkStation_BadRequest() {
         HttpEntity<Object> httpEntity = new HttpEntity<>(null, getHttpHeaders());
         ResponseEntity<String> response = restTemplate.exchange(getUrl(), HttpMethod.POST, httpEntity, String.class);
         String responseBody = response.getBody();
@@ -61,12 +58,12 @@ public class LinkStationServiceIntegrationTest {
     }
 
     @Test
-    public void testGetBestLinkStationForOrigin_invalidXCoordinate() {
-        try {
-            getPoint(null, 5);
-        } catch (NullPointerException e) {
-            Assert.assertEquals("xCoordinate is marked non-null but is null", e.getMessage());
-        }
+    public void testGetBestLinkStation_invalidXCoordinate() {
+        Point point = getPoint(null, 100);
+        HttpEntity<Point> httpEntity = new HttpEntity<>(point, getHttpHeaders());
+        ResponseEntity<String> response = restTemplate.exchange(getUrl(), HttpMethod.POST, httpEntity, String.class);
+        String responseBody = response.getBody();
+        Assert.assertEquals("400 BAD_REQUEST \"Point cannot be empty, please enter device's xCoordinate and yCoordinate in the expected format\"", responseBody);
 
     }
 
