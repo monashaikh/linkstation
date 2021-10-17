@@ -61,7 +61,7 @@ Java : jdk1.8.0_231
 
 Example : 
 
-`curl -X POST "http://localhost:8080/api/get-best-link-station" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"xCoordinate\": 18, \"yCoordinate\": 18}"`
+`curl -X POST "https://linkstation-app.herokuapp.com/api/get-best-link-station" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"xCoordinate\": 18, \"yCoordinate\": 18}"`
 
 OR
 
