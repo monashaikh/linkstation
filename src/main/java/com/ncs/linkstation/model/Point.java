@@ -1,7 +1,10 @@
 package com.ncs.linkstation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @Getter
@@ -9,11 +12,9 @@ import lombok.*;
 @ToString
 public class Point {
 
-    @NonNull
     @JsonProperty("xCoordinate")
     private Integer xCoordinate;
 
-    @NonNull
     @JsonProperty("yCoordinate")
     private Integer yCoordinate;
 }

@@ -14,7 +14,6 @@ public class LinkStationExceptions {
     public ResponseEntity<String> handleBadRequestException(
             ResponseStatusException exception
     ) {
-        System.out.println(exception.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exception.getMessage());
@@ -23,8 +22,21 @@ public class LinkStationExceptions {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleMessageNotReadableException(HttpMessageNotReadableException exception) {
+        String causeMessage = getMessageFromException(exception);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(exception.getCause() == null ? exception.getMessage() : exception.getCause().getMessage());
+                .body(causeMessage);
+    }
+
+    private String getMessageFromException(HttpMessageNotReadableException exception) {
+        Throwable cause = exception.getCause();
+        String causeMessage = exception.getMessage();
+        if (null != cause) {
+            causeMessage = cause.getMessage();
+        }
+        if (causeMessage.indexOf("at [") > 0) {
+            causeMessage = causeMessage.substring(0, causeMessage.indexOf("at ["));
+        }
+        return causeMessage;
     }
 }

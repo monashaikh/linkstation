@@ -8,6 +8,5 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface LinkStationRepository extends JpaRepository<LinkStation, Integer>{
-
+public interface LinkStationRepository extends JpaRepository<LinkStation, Integer> {
 }

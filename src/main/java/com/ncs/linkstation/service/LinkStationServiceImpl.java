@@ -34,7 +34,7 @@ public class LinkStationServiceImpl implements LinkStationService {
      */
     @Override
     public String getBestLinkStation(Point point) {
-        if (Objects.isNull(point)) {
+        if (Objects.isNull(point) || Objects.isNull(point.getXCoordinate()) || Objects.isNull(point.getYCoordinate())) {
             log.error(INPUT_ERROR);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INPUT_ERROR);
         }

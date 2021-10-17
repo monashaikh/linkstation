@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages ={"com.ncs.linkstation"})
-public class LinkstationApplication {
+@ComponentScan(basePackages = {"com.ncs.linkstation"})
+public class LinkStationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LinkstationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LinkStationApplication.class, args);
+    }
 
 }
